@@ -1,0 +1,39 @@
+{
+  "todos": [
+    {
+      "userId": 1,
+      "title": "Wave hello! 👋",
+      "completed": false,
+      "id": "1"
+    },
+    {
+      "userId": 1,
+      "title": "Get Coffee ☕☕☕",
+      "completed": true,
+      "id": "2"
+    },
+    {
+      "id": "de92",
+      "userId": 1,
+      "title": "rak prim",
+      "completed": true
+    },
+    {
+      "id": "fbbc",
+      "userId": 1,
+      "title": "primmmmmm",
+      "completed": true
+    },
+    {
+      "id": "141e",
+      "userId": 1,
+      "title": "nlnlnknjhgccv"
+    },
+    {
+      "id": "00bb",
+      "userId": 1,
+      "title": "dpkpojdfasdf",
+      "completed": true
+    }
+  ]
+}
