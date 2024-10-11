@@ -1,0 +1,7 @@
+.main{
+    min-height: 100nh;
+    display: grid;
+    place-content: center;
+    background-color: #333;
+    -webkit-text-fill-color:#999 ;
+}
