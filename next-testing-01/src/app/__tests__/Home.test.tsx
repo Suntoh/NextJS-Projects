@@ -1,38 +1,48 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Home from "@/app/page";
+import userEvent from "@testing-library/user-event";
 
-//triple A testing method
-// Arrange, Act, Assert
-// Arrange: Set up the test environment and render the component
-// Act: Perform the action that you want to test
-// Assert: Check if the expected outcome occurs
+//integgration test end to end testing estimate userEvent
 describe("Home", () => {
-  it("should have Docs text", () => {
-    render(<Home />); //ARRANGE
+  it("should add a new todo", async () => {
+    render(<Home />);
 
-    const myElement = screen.getByText("Read our docs"); //ACT
-    //need to be the exact text <a>Read our docs</a>
+    const input = screen.getByPlaceholderText("New Todo");
+    await userEvent.type(input, "My new todo");
+    expect(input).toHaveValue("My new todo");
 
-    expect(myElement).toBeInTheDocument(); //ASSERT
+    const button = screen.getByRole("button", {
+      name: "Submit",
+    });
+    await userEvent.click(button);
+    expect(button).toHaveValue("");
+
+    const data = await screen.findByText("My new todo");
+    //findByText is async, getByText is sync
+    expect(data).toHaveTextContent("My new todo");
   });
-  it("should contain the text 'next.js'", () => {
-    render(<Home />); //ARRANGE
 
-    const myElement = screen.getByText(/nextjs/i); //ACT
-    //can be exact or regex <a>Go to nextjs.org →</a>
-    //i=upper or lower case is fine
+  it("should update a todo", async () => {
+    render(<Home />);
 
-    expect(myElement).toBeInTheDocument(); //ASSERT
+    const checkbox = screen.getAllByRole("checkbox")[0] as HTMLInputElement;
+    expect(checkbox).toBeFalsy(); //it is false = not checked
+    await userEvent.click(checkbox);
+    expect(checkbox).toBeTruthy(); // it is true = checked
   });
-  it("should have a heading", () => {
-    render(<Home />); //ARRANGE
 
-    const myElement = screen.getByRole("heading", {
-      name: "Learn",
-    }); //ACT
-    //need to be exact <h2>Learn</h3>
+  it("should delete a todo", async () => {
+    render(<Home />);
 
-    expect(myElement).toBeInTheDocument(); //ASSERT
+    //not to be in document use queryBy(should be there) instead of getBy(might get error)
+    const todoText = screen.queryByText("Write Code 💻");
+    expect(todoText).toBeInTheDocument();
+
+    const button = screen.getAllByTestId("delete-button")[0];
+    await userEvent.click(button);
+
+    expect(todoText).not.toBeInTheDocument();
+    //use queryByText
   });
 });
