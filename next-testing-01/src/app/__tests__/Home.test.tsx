@@ -27,9 +27,9 @@ describe("Home", () => {
     render(<Home />);
 
     const checkbox = screen.getAllByRole("checkbox")[0] as HTMLInputElement;
-    expect(checkbox).toBeFalsy(); //it is false = not checked
+    expect(checkbox).not.toBeChecked(); //it is false = not checked
     await userEvent.click(checkbox);
-    expect(checkbox).toBeTruthy(); // it is true = checked
+    expect(checkbox).toBeChecked(); // it is true = checked
   });
 
   it("should delete a todo", async () => {

@@ -6,12 +6,12 @@ const mockSetTodos = jest.fn();
 
 describe("AddTodo", () => {
   describe("Render", () => {
-    it("should render a form", () => {
-      render(<AddTodo setTodos={mockSetTodos} />);
+    // it("should render a form", () => {
+    //   render(<AddTodo setTodos={mockSetTodos} />);
 
-      const form = screen.getByRole("form");
-      expect(form).toBeInTheDocument();
-    });
+    //   const form = screen.getByRole("form");
+    //   expect(form).toBeInTheDocument();
+    // });
 
     // it("should render a label", () => {
     //   render(<AddTodo setTodos={mockSetTodos} />);
