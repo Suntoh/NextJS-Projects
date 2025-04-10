@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import AddTodo from "../AddTodo";
 
@@ -72,8 +72,10 @@ describe("AddTodo", () => {
         name: "Submit",
       });
       await userEvent.click(button);
-
-      expect(input).toHaveValue("");
+      waitFor(() => {
+        expect(input).toHaveValue("");
+      });
+      //we clear after the api call, should waitFor
     });
 
     it("should call setTodos when submitted", async () => {
